@@ -1,10 +1,5 @@
-FROM alpine:3.8
+FROM nginxinc/nginx-unprivileged:1.23-alpine
 
-LABEL maintainer="Rainist Engineering <engineering@rainist.com>"
+COPY nginx.conf /etc/nginx/conf.d
 
-RUN apk update && apk add tinyproxy=1.8.4-r3
-
-COPY tinyproxy.conf /etc/tinyproxy
-
-ENTRYPOINT ["tinyproxy"]
-CMD ["-d"]
+CMD ["nginx", "-g", "daemon off;"]
